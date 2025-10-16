@@ -1,0 +1,165 @@
+{
+  "effects": [
+    {
+      "id": 1,
+      "path": "cases/basic/04",
+      "title": "timeline(时间线)进阶",
+      "description": "善用stagger",
+      "tags": [
+        "timeline"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "basic",
+      "createTime": "2025-10-15 19:22:58"
+    },
+    {
+      "id": 2,
+      "path": "cases/basic/03",
+      "title": "timeline(时间线)入门",
+      "description": "时间线的话直管往时间线添加动画即可，无需手动维护延时",
+      "tags": [
+        "timeline"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "basic",
+      "createTime": "2025-10-15 08:47:54"
+    },
+    {
+      "id": 3,
+      "path": "cases/basic/02",
+      "title": "stagger(交错)",
+      "description": "善用stagger",
+      "tags": [
+        "stagger",
+        "yoyo",
+        "repeat"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "basic",
+      "createTime": "2025-10-14 22:03:39"
+    },
+    {
+      "id": 4,
+      "path": "cases/basic/01",
+      "title": "gsap环境搭建",
+      "description": "gsap环境搭建",
+      "tags": [
+        "from",
+        "to",
+        "test"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "basic",
+      "createTime": "2025-10-14 21:05:45"
+    },
+    {
+      "id": 5,
+      "path": "cases/first/02",
+      "title": "demo2",
+      "description": "this is demo",
+      "tags": [
+        "CSS3",
+        "3D",
+        "卡片"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "first",
+      "createTime": "2025-10-13 15:49:00"
+    },
+    {
+      "id": 6,
+      "path": "cases/first/01",
+      "title": "demo1",
+      "description": "this is demo",
+      "tags": [
+        "CSS3",
+        "3D",
+        "卡片"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "first",
+      "createTime": "2025-10-13 11:38:00"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "timeline"
+    },
+    {
+      "id": 2,
+      "name": "stagger"
+    },
+    {
+      "id": 3,
+      "name": "yoyo"
+    },
+    {
+      "id": 4,
+      "name": "repeat"
+    },
+    {
+      "id": 5,
+      "name": "from"
+    },
+    {
+      "id": 6,
+      "name": "to"
+    },
+    {
+      "id": 7,
+      "name": "test"
+    },
+    {
+      "id": 8,
+      "name": "CSS3"
+    },
+    {
+      "id": 9,
+      "name": "3D"
+    },
+    {
+      "id": 10,
+      "name": "卡片"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "basic"
+    },
+    {
+      "id": 2,
+      "name": "first"
+    }
+  ],
+  "difficulties": [
+    {
+      "id": 1,
+      "name": "初级",
+      "value": "beginner"
+    },
+    {
+      "id": 2,
+      "name": "中级",
+      "value": "intermediate"
+    },
+    {
+      "id": 3,
+      "name": "高级",
+      "value": "advanced"
+    }
+  ]
+}
