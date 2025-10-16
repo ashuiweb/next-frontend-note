@@ -3,10 +3,10 @@
     {
       "id": 1,
       "path": "cases/basic/04",
-      "title": "timeline(时间线)进阶",
-      "description": "善用stagger",
+      "title": "scrollTrigger初探",
+      "description": " ",
       "tags": [
-        "timeline"
+        "scrollTrigger"
       ],
       "difficulty": "beginner",
       "author": "阿水",
@@ -96,42 +96,46 @@
   "tags": [
     {
       "id": 1,
-      "name": "timeline"
+      "name": "scrollTrigger"
     },
     {
       "id": 2,
-      "name": "stagger"
+      "name": "timeline"
     },
     {
       "id": 3,
-      "name": "yoyo"
+      "name": "stagger"
     },
     {
       "id": 4,
-      "name": "repeat"
+      "name": "yoyo"
     },
     {
       "id": 5,
-      "name": "from"
+      "name": "repeat"
     },
     {
       "id": 6,
-      "name": "to"
+      "name": "from"
     },
     {
       "id": 7,
-      "name": "test"
+      "name": "to"
     },
     {
       "id": 8,
-      "name": "CSS3"
+      "name": "test"
     },
     {
       "id": 9,
-      "name": "3D"
+      "name": "CSS3"
     },
     {
       "id": 10,
+      "name": "3D"
+    },
+    {
+      "id": 11,
       "name": "卡片"
     }
   ],
