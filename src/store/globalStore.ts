@@ -1,4 +1,5 @@
 import { immer } from "zustand/middleware/immer";
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 import { ReactNode } from "react";
 import { create } from "zustand";
@@ -8,16 +9,33 @@ export type GlobalState = {
     detailCode?: string;
     fullScreenSideDrawerOpen?: boolean;
     fullScreenSideDrawerChildren?: ReactNode;
+    setDetailCode?: (code: string) => void;
 };
 
 type State = UseStore<GlobalState>;
 
-export const useGlobalState = create<State, any>(
+export const useGlobalState = create<State>()(
+  persist(
     immer((set, _get) => {
         return {
             ...storeUtils(set),
+            // 设置默认值
+            detailCode: '',
+            fullScreenSideDrawerOpen: false,
+            // 添加设置方法
+            setDetailCode: (code: string) => set({ detailCode: code }),
         };
-    })
+    }),
+    {
+      name: 'ashui-gsap-storage', // 存储的唯一key
+      storage: createJSONStorage(() => localStorage),
+      // 只持久化部分状态
+      partialize: (state) => ({ 
+        detailCode: state.detailCode,
+        fullScreenSideDrawerOpen: state.fullScreenSideDrawerOpen 
+      }),
+    }
+  )
 );
 
 export const setGlobalData = useGlobalState.getState().setState;

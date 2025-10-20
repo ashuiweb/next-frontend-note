@@ -50,7 +50,7 @@ const EffectCard: React.FC<EffectCardProps> = ({ effect, darkMode, ratio }) => {
                 }}
                 onContextMenu={(e) => {
                     e.preventDefault();
-                    drawer(<Detail />);
+                    drawer(<iframe src={`/detail1?path=${effect.path}`} className="border-none" width="100%" height="100%" />);
                 }}
                 onDoubleClick={() => to(`/detail?path=${effect.path}`)}
             >

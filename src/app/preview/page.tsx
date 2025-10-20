@@ -1,29 +1,25 @@
 "use client";
-import { useGlobalState } from "@/store/globalStore";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 //@ts-ignore
 import { transform } from "@babel/standalone";
 
-import { gsap, gsapReact } from "@/util/gsap";
+import { useIframeSync } from "@/hooks/useIframeSync";
+import { gsap, useGSAP } from "@/util/gsap";
 import * as ahooks from "ahooks";
 import { useDebounceFn, useKeyPress, useMemoizedFn } from "ahooks";
 import dayjs from "dayjs";
-export default function Preview() {
-    return <CMain />;
-}
 
 const currentDependencies = {
     dayjs,
     ahooks,
     gsap,
-    gsapReact,
     useEffect,
     useState,
     useRef,
     useMemo,
     useMemoizedFn,
-    useGSAP: gsapReact.useGSAP,
+    useGSAP,
 };
 
 function createSafeComponent(code: string, dependencies = currentDependencies) {
@@ -60,11 +56,16 @@ function createSafeComponent(code: string, dependencies = currentDependencies) {
     return getComponent(React, ...dependencyValues);
 }
 
+export default function PreviewPage() {
+    return <CMain />;
+}
+
 function CMain() {
     const [PreviewComponent, setPreviewComponent] = useState<React.ComponentType | null>(null);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { detailCode } = useGlobalState((s) => ({ detailCode: s.detailCode }));
+    // 使用自定义 hook 替代直接从 zustand 获取状态
+    const { detailCode } = useIframeSync();
     const [key, setKey] = useState(0); // 用于强制重新渲染ErrorBoundary
     const resetErrorBoundaryRef = React.useRef<() => void>(() => {});
 

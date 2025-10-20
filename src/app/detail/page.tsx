@@ -6,7 +6,7 @@ import { removeExportsPrecise } from "@/util";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import Coder from "./Coder";
-import Preview from "./Preview";
+import { setGlobalData } from "@/store/globalStore";
 
 export default async function page({ searchParams }: { searchParams: { path: string } }) {
     const { path } = await searchParams;
@@ -27,10 +27,25 @@ export default async function page({ searchParams }: { searchParams: { path: str
     }
 
     const code = removeExportsPrecise(fileContent);
+    
+    // 设置初始代码到全局状态
+    setGlobalData({ detailCode: code });
+
+    // 构建 Preview 页面的 URL
+    const previewUrl = `/preview`;
 
     return (
         <MultiResizablePanels 
-            leftPanels={[<Preview />, <Coder value={code} />]} 
+            leftPanels={[
+                <div className="w-full h-full">
+                    <iframe 
+                        src={previewUrl} 
+                        className="w-full h-full border-none"
+                        title="Preview"
+                    />
+                </div>, 
+                <Coder value={code} />
+            ]} 
             rightPanel={<MarkdownRenderer content={readmeContent} />} 
             defaultLeftWidth={60} 
             minLeftWidth={20} 
