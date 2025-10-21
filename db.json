@@ -2,6 +2,87 @@
   "effects": [
     {
       "id": 1,
+      "path": "cases/GSAP3 Beyond the Basics/05",
+      "title": "04 创建一个动画精度条",
+      "description": " progrss()",
+      "tags": [
+        "progrss",
+        "time",
+        "onComplete",
+        "onUpdate"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-21 22:04:13"
+    },
+    {
+      "id": 2,
+      "path": "cases/GSAP3 Beyond the Basics/04",
+      "title": "05 tween progress() of an animation",
+      "description": " progrss()",
+      "tags": [
+        "progrss",
+        "time",
+        "onComplete",
+        "onUpdate"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-21 20:51:55"
+    },
+    {
+      "id": 3,
+      "path": "cases/GSAP3 Beyond the Basics/03",
+      "title": "03 一个暂停和重启动画的按钮",
+      "description": "paused() ",
+      "tags": [
+        "paused"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-21 20:30:31"
+    },
+    {
+      "id": 4,
+      "path": "cases/GSAP3 Beyond the Basics/02",
+      "title": "02 getter-setterMethods",
+      "description": "paused() reversed() timeScale() time() progrss()",
+      "tags": [
+        "paused",
+        "reversed",
+        "timeScale",
+        "time",
+        "progress"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-20 21:36:11"
+    },
+    {
+      "id": 5,
+      "path": "cases/GSAP3 Beyond the Basics/01",
+      "title": "01 使用motionPath来让元素沿着路径运动",
+      "description": "使用motionPath来让元素沿着路径运动",
+      "tags": [
+        "svg",
+        "motionPath"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-20 08:02:04"
+    },
+    {
+      "id": 6,
       "path": "cases/basic/06",
       "title": "svg 线条动画",
       "description": "svg 线条动画",
@@ -15,7 +96,7 @@
       "createTime": "2025-10-17 07:49:58"
     },
     {
-      "id": 2,
+      "id": 7,
       "path": "cases/basic/05",
       "title": "matchMedia 响应式动画",
       "description": "根据屏幕大小不同展示不同的动画",
@@ -30,7 +111,7 @@
       "createTime": "2025-10-16 09:02:57"
     },
     {
-      "id": 3,
+      "id": 8,
       "path": "cases/basic/04",
       "title": "scrollTrigger初探",
       "description": " ",
@@ -44,7 +125,7 @@
       "createTime": "2025-10-15 19:22:58"
     },
     {
-      "id": 4,
+      "id": 9,
       "path": "cases/basic/03",
       "title": "timeline(时间线)入门",
       "description": "时间线的话直管往时间线添加动画即可，无需手动维护延时",
@@ -58,7 +139,7 @@
       "createTime": "2025-10-15 08:47:54"
     },
     {
-      "id": 5,
+      "id": 10,
       "path": "cases/basic/02",
       "title": "stagger(交错)",
       "description": "善用stagger",
@@ -74,7 +155,7 @@
       "createTime": "2025-10-14 22:03:39"
     },
     {
-      "id": 6,
+      "id": 11,
       "path": "cases/basic/01",
       "title": "gsap环境搭建",
       "description": "gsap环境搭建",
@@ -90,7 +171,7 @@
       "createTime": "2025-10-14 21:05:45"
     },
     {
-      "id": 7,
+      "id": 12,
       "path": "cases/first/02",
       "title": "demo2",
       "description": "this is demo",
@@ -106,7 +187,7 @@
       "createTime": "2025-10-13 15:49:00"
     },
     {
-      "id": 8,
+      "id": 13,
       "path": "cases/first/01",
       "title": "demo1",
       "description": "this is demo",
@@ -125,64 +206,104 @@
   "tags": [
     {
       "id": 1,
-      "name": "svg"
+      "name": "progrss"
     },
     {
       "id": 2,
-      "name": "scrollTrigger"
+      "name": "time"
     },
     {
       "id": 3,
-      "name": "matchMedia"
+      "name": "onComplete"
     },
     {
       "id": 4,
-      "name": "timeline"
+      "name": "onUpdate"
     },
     {
       "id": 5,
-      "name": "stagger"
+      "name": "paused"
     },
     {
       "id": 6,
-      "name": "yoyo"
+      "name": "reversed"
     },
     {
       "id": 7,
-      "name": "repeat"
+      "name": "timeScale"
     },
     {
       "id": 8,
-      "name": "from"
+      "name": "progress"
     },
     {
       "id": 9,
-      "name": "to"
+      "name": "svg"
     },
     {
       "id": 10,
-      "name": "test"
+      "name": "motionPath"
     },
     {
       "id": 11,
-      "name": "CSS3"
+      "name": "scrollTrigger"
     },
     {
       "id": 12,
-      "name": "3D"
+      "name": "matchMedia"
     },
     {
       "id": 13,
+      "name": "timeline"
+    },
+    {
+      "id": 14,
+      "name": "stagger"
+    },
+    {
+      "id": 15,
+      "name": "yoyo"
+    },
+    {
+      "id": 16,
+      "name": "repeat"
+    },
+    {
+      "id": 17,
+      "name": "from"
+    },
+    {
+      "id": 18,
+      "name": "to"
+    },
+    {
+      "id": 19,
+      "name": "test"
+    },
+    {
+      "id": 20,
+      "name": "CSS3"
+    },
+    {
+      "id": 21,
+      "name": "3D"
+    },
+    {
+      "id": 22,
       "name": "卡片"
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "basic"
+      "name": "GSAP3 Beyond the Basics"
     },
     {
       "id": 2,
+      "name": "basic"
+    },
+    {
+      "id": 3,
       "name": "first"
     }
   ],

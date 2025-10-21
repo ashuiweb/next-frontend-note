@@ -1,0 +1,11 @@
+{
+    "title": "01 使用motionPath来让元素沿着路径运动",
+    "description": "使用motionPath来让元素沿着路径运动",
+    "tags": [
+        "svg",
+        "motionPath"
+    ],
+    "difficulty": "beginner",
+    "author": "阿水",
+    "likes": 95
+}

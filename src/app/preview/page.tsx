@@ -107,12 +107,15 @@ function CMain() {
                 return;
             }
 
-            // 2. 编译JSX到JavaScript
-            // 使用经典的 JSX Transform，更稳定
+            // 2. 编译TypeScript + JSX到JavaScript
+            // 使用 @babel/preset-typescript 处理 TS，使用 @babel/preset-react 处理 JSX
             const result = transform(detailCode, {
-                presets: ["react"],
+                presets: [
+                    ["typescript", { allowNamespaces: true }], // 支持 TypeScript 语法
+                    ["react", { runtime: "classic" }],         // 使用经典 JSX 转换
+                ],
                 plugins: [],
-                filename: "preview.js",
+                filename: "preview.tsx", // 更改文件名反映其 TSX 性质
             });
 
             console.log("编译后的代码:", result.code);

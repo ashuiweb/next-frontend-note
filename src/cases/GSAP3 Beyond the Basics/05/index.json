@@ -1,0 +1,13 @@
+{
+    "title": "05 tween progress() of an animation",
+    "description": "用来控制ainimation的手段",
+    "tags": [
+        "progrss",
+        "time",
+        "onComplete",
+        "onUpdate"
+    ],
+    "difficulty": "beginner",
+    "author": "阿水",
+    "likes": 95
+}
