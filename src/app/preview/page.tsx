@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import VConsole from "vconsole";
 //@ts-ignore
 import { transform } from "@babel/standalone";
 
@@ -18,8 +19,8 @@ const currentDependencies = {
     useState,
     useRef,
     useMemo,
-    useMemoizedFn,
     useGSAP,
+    ...ahooks,
 };
 
 function createSafeComponent(code: string, dependencies = currentDependencies) {
@@ -57,6 +58,9 @@ function createSafeComponent(code: string, dependencies = currentDependencies) {
 }
 
 export default function PreviewPage() {
+    useEffect(() => {
+        new VConsole();
+    }, []);
     return <CMain />;
 }
 
@@ -92,8 +96,6 @@ function CMain() {
     });
 
     const loadComp = useMemoizedFn(() => {
-        console.log("detailCode", detailCode);
-
         // 清空之前的错误和组件
         setError("");
         setPreviewComponent(null);
@@ -112,13 +114,11 @@ function CMain() {
             const result = transform(detailCode, {
                 presets: [
                     ["typescript", { allowNamespaces: true }], // 支持 TypeScript 语法
-                    ["react", { runtime: "classic" }],         // 使用经典 JSX 转换
+                    ["react", { runtime: "classic" }], // 使用经典 JSX 转换
                 ],
                 plugins: [],
                 filename: "preview.tsx", // 更改文件名反映其 TSX 性质
             });
-
-            console.log("编译后的代码:", result.code);
 
             // 使用方式
             const Component = createSafeComponent(result.code);

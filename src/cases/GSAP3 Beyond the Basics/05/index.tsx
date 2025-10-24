@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { gsap, useGSAP } from "@/util/gsap";
 import { useMemoizedFn, useToggle } from "ahooks";
 import { useEffect, useRef, useState } from "react";
@@ -115,7 +114,7 @@ export default function Main() {
                 <rect id="movingBox" x="90" y="190" width="20" height="20" fill="#e74c3c" rx="2" />
             </svg>
             <div className="flex justify-center">
-                <Button onClick={toggle}>{isPaused ? "播放" : "暂停"}</Button>
+                <button onClick={toggle}>{isPaused ? "播放" : "暂停"}</button>
                 <div>
                     <input className="w-[40vw]" value={progress} onChange={(e) => setProgess(Number(e.target.value))} type="range" min="0" max="1" step="0.001" />
                     <div>{progress.toFixed(2)}</div>

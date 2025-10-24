@@ -12,6 +12,11 @@
 
 @layer utilities {
 
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .text-balance {
     text-wrap: balance;

@@ -22,3 +22,18 @@ function removeImportStatements(code: string) {
 export function removeExportsPrecise(code: string) {
     return removeImportStatements(code.replace(/export\s+(?:default\s+)?/g, ""));
 }
+
+export function setStyles(element: HTMLElement, styles: HTMLElement["style"]) {
+    Object.keys(styles).forEach((property) => {
+        // 处理 CSS 自定义属性
+        if (property.startsWith("--")) {
+            //@ts-ignore
+            element.style.setProperty(property, styles[property]);
+        } else {
+            // 转换 camelCase 为 kebab-case
+            const cssProperty = property.replace(/[A-Z]/g, "-$&").toLowerCase();
+            //@ts-ignore
+            element.style.setProperty(cssProperty, styles[property]);
+        }
+    });
+}

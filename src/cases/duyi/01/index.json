@@ -1,0 +1,11 @@
+{
+    "title": "使用代理实现单例",
+    "description": "比较严谨的实现代理方案",
+    "tags": [
+        "proxy",
+        "单例"
+    ],
+    "difficulty": "beginner",
+    "author": "阿水",
+    "likes": 95
+}

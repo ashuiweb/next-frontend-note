@@ -9,6 +9,11 @@ const nextConfig = {
     
     return config;
   },
+  
+  // 配置Babel
+  experimental: {
+    externalResolver: true,
+  }
 };
 
 export default nextConfig;
