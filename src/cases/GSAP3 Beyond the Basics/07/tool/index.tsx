@@ -1,17 +1,19 @@
 "use client";
 import { useDragable } from "@/hooks/useDragable";
 import { gsap, useGSAP } from "@/util/gsap";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 export default function Tool({ animation }: { animation: gsap.core.Timeline }) {
     const container = useRef<HTMLDivElement>(null);
-    const total = useMemo(() => animation.duration(), [animation]);
+
+    const [total, setTotal] = useState(animation.duration());
     const children = useMemo(() => animation.getChildren(), [animation]);
+    const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
     // 直接解构获取位置信息
     useDragable(".handler", {
         dragX: true,
-
+        handler: ".handler-item",
         minX: "0%",
         maxX: "100%",
 
@@ -22,6 +24,67 @@ export default function Tool({ animation }: { animation: gsap.core.Timeline }) {
             animation.progress(px);
         },
     });
+
+    // 为每个子动画条添加拖拽功能
+    children.forEach((child, index) => {
+        useDragable(`.child-${index}`, {
+            dragX: true,
+            dragY: false,
+            minX: "0%",
+            handler: ".flex-1",
+            updateCB: ({ px, x }) => {
+                // 更新子动画的开始时间
+                if (px !== undefined && total > 0 && draggingIndex === index) {
+                    const newStartTime = px * total;
+                    // 保存原始持续时间
+                    const originalDuration = child.duration();
+                    // 使用 GSAP 的 startTime 方法更新子动画的开始时间
+                    child.startTime(newStartTime);
+                    // 保持原有的持续时间不变，这样结束时间也会相应调整
+                    child.duration(originalDuration);
+                    // 暂停主动画以避免冲突
+                    animation.paused(true);
+                    console.log(`Updated child ${index} start time to: ${newStartTime}`);
+                    
+                    // 备选方案：如果你想保持结束时间不变（调整持续时间）
+                    // const newEndTime = child.endTime(); // 获取当前结束时间
+                    // child.startTime(newStartTime); // 设置新开始时间
+                    // child.duration(newEndTime - newStartTime); // 调整持续时间以保持结束时间不变
+                }
+            },
+        });
+
+        useDragable(`.child-${index}`, {
+            dragX: true,
+            dragY: false,
+            minX: "0%",
+            maxX: "1000%",
+            resize: true,
+            handler: ".bg-white",
+            updateCB: ({ px, x }) => {
+                //根据宽度 重新设置duration
+                if (px !== undefined && total > 0 && draggingIndex === index) {
+                    // 确保子动画存在且有duration方法
+                    if (child && typeof (child as gsap.core.Tween).duration === "function") {
+                        // 计算新的持续时间（基于总持续时间和比例）
+                        const newDuration = Math.max(0.1, px * total); // 确保最小持续时间0.1秒
+                        // 更新子动画的持续时间
+                        (child as gsap.core.Tween).duration(newDuration);
+                        // 暂停主动画以避免冲突
+                        animation.paused(true);
+                        console.log(`Updated child ${index} duration to: ${newDuration}`);
+
+                        // 同时更新UI中的宽度显示
+                        const element = document.querySelector(`.child-${index}`);
+                        if (element) {
+                            (element as HTMLElement).style.width = `${px * 100}%`;
+                        }
+                    }
+                }
+            },
+        });
+    });
+
     useGSAP(
         () => {
             animation.eventCallback("onUpdate", function (this: gsap.core.Tween) {
@@ -58,7 +121,7 @@ export default function Tool({ animation }: { animation: gsap.core.Timeline }) {
                 {children.map((it, index) => (
                     <div key={index} className="trace relative bg-slate-200 w-full border-b-4 border-slate-600 h-10">
                         <div
-                            className="h-full bg-pink-500 absolute "
+                            className={`h-full flex absolute child-${index}     `}
                             style={{
                                 left: `${(it.startTime() / total) * 100}%`,
                                 width: `${(it.duration() / total) * 100}%`,
@@ -67,7 +130,12 @@ export default function Tool({ animation }: { animation: gsap.core.Timeline }) {
                             onClick={() => {
                                 console.dir(it.startTime());
                             }}
-                        ></div>
+                            onMouseDown={() => setDraggingIndex(index)}
+                            onMouseUp={() => setDraggingIndex(null)}
+                        >
+                            <div className="flex-1 bar relative"></div>
+                            <div className="w-4  bg-white h-full absolute opacity-45 top-0 right-0"></div>
+                        </div>
                     </div>
                 ))}
             </div>

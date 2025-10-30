@@ -1,0 +1,14 @@
+.wrapper {
+    perspective: 800px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+
+    :global {
+        h1 {
+            font-size: 8vw;
+            font-weight: 600;
+        }
+    }
+}

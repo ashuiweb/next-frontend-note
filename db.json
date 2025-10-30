@@ -2,11 +2,26 @@
   "effects": [
     {
       "id": 1,
-      "path": "cases/GSAP3 Beyond the Basics/07",
-      "title": "06 callbacks",
-      "description": "callback的用法以及如何传递参数",
+      "path": "cases/GSAP3 Beyond the Basics/09",
+      "title": "09 gsap.utils.wrap()构建交错动画",
+      "description": "gsap.utils.wrap",
       "tags": [
-        "callback"
+        "wrap"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-28 20:11:25"
+    },
+    {
+      "id": 2,
+      "path": "cases/GSAP3 Beyond the Basics/07",
+      "title": "07 构建一条可视化时间线",
+      "description": "animation.getChildren()",
+      "tags": [
+        "callback",
+        "getChildren"
       ],
       "difficulty": "beginner",
       "author": "阿水",
@@ -15,7 +30,21 @@
       "createTime": "2025-10-23 20:42:19"
     },
     {
-      "id": 2,
+      "id": 3,
+      "path": "cases/GSAP3 Beyond the Basics/08",
+      "title": "08 取消某个元素的动画",
+      "description": "gsap.killTweensOf('classname'，可选属性，支持多个)",
+      "tags": [
+        "killTweensOf"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "GSAP3 Beyond the Basics",
+      "createTime": "2025-10-23 20:42:19"
+    },
+    {
+      "id": 4,
       "path": "cases/duyi/01",
       "title": "使用代理实现单例",
       "description": "比较严谨的实现代理方案",
@@ -30,7 +59,7 @@
       "createTime": "2025-10-22 09:00:22"
     },
     {
-      "id": 3,
+      "id": 5,
       "path": "cases/GSAP3 Beyond the Basics/06",
       "title": "06 callbacks",
       "description": "callback的用法以及如何传递参数",
@@ -44,7 +73,7 @@
       "createTime": "2025-10-21 22:30:10"
     },
     {
-      "id": 4,
+      "id": 6,
       "path": "cases/GSAP3 Beyond the Basics/05",
       "title": "05 tween progress() of an animation",
       "description": "用来控制ainimation的手段",
@@ -61,7 +90,7 @@
       "createTime": "2025-10-21 22:04:13"
     },
     {
-      "id": 5,
+      "id": 7,
       "path": "cases/GSAP3 Beyond the Basics/04",
       "title": "04 创建一个动画精度条",
       "description": " progrss()",
@@ -78,7 +107,7 @@
       "createTime": "2025-10-21 20:51:55"
     },
     {
-      "id": 6,
+      "id": 8,
       "path": "cases/GSAP3 Beyond the Basics/03",
       "title": "03 一个暂停和重启动画的按钮",
       "description": "paused() ",
@@ -92,7 +121,7 @@
       "createTime": "2025-10-21 20:30:31"
     },
     {
-      "id": 7,
+      "id": 9,
       "path": "cases/GSAP3 Beyond the Basics/02",
       "title": "02 getter-setterMethods",
       "description": "paused() reversed() timeScale() time() progrss()",
@@ -110,7 +139,7 @@
       "createTime": "2025-10-20 21:36:11"
     },
     {
-      "id": 8,
+      "id": 10,
       "path": "cases/GSAP3 Beyond the Basics/01",
       "title": "01 使用motionPath来让元素沿着路径运动",
       "description": "使用motionPath来让元素沿着路径运动",
@@ -125,7 +154,7 @@
       "createTime": "2025-10-20 08:02:04"
     },
     {
-      "id": 9,
+      "id": 11,
       "path": "cases/basic/06",
       "title": "svg 线条动画",
       "description": "svg 线条动画",
@@ -139,7 +168,7 @@
       "createTime": "2025-10-17 07:49:58"
     },
     {
-      "id": 10,
+      "id": 12,
       "path": "cases/basic/05",
       "title": "matchMedia 响应式动画",
       "description": "根据屏幕大小不同展示不同的动画",
@@ -154,7 +183,7 @@
       "createTime": "2025-10-16 09:02:57"
     },
     {
-      "id": 11,
+      "id": 13,
       "path": "cases/basic/04",
       "title": "scrollTrigger初探",
       "description": " ",
@@ -168,7 +197,7 @@
       "createTime": "2025-10-15 19:22:58"
     },
     {
-      "id": 12,
+      "id": 14,
       "path": "cases/basic/03",
       "title": "timeline(时间线)入门",
       "description": "时间线的话直管往时间线添加动画即可，无需手动维护延时",
@@ -182,7 +211,7 @@
       "createTime": "2025-10-15 08:47:54"
     },
     {
-      "id": 13,
+      "id": 15,
       "path": "cases/basic/02",
       "title": "stagger(交错)",
       "description": "善用stagger",
@@ -198,7 +227,7 @@
       "createTime": "2025-10-14 22:03:39"
     },
     {
-      "id": 14,
+      "id": 16,
       "path": "cases/basic/01",
       "title": "gsap环境搭建",
       "description": "gsap环境搭建",
@@ -214,7 +243,7 @@
       "createTime": "2025-10-14 21:05:45"
     },
     {
-      "id": 15,
+      "id": 17,
       "path": "cases/first/02",
       "title": "demo2",
       "description": "this is demo",
@@ -230,7 +259,7 @@
       "createTime": "2025-10-13 15:49:00"
     },
     {
-      "id": 16,
+      "id": 18,
       "path": "cases/first/01",
       "title": "demo1",
       "description": "this is demo",
@@ -249,102 +278,114 @@
   "tags": [
     {
       "id": 1,
-      "name": "callback"
+      "name": "wrap"
     },
     {
       "id": 2,
-      "name": "proxy"
+      "name": "callback"
     },
     {
       "id": 3,
-      "name": "单例"
+      "name": "getChildren"
     },
     {
       "id": 4,
-      "name": "progrss"
+      "name": "killTweensOf"
     },
     {
       "id": 5,
-      "name": "time"
+      "name": "proxy"
     },
     {
       "id": 6,
-      "name": "onComplete"
+      "name": "单例"
     },
     {
       "id": 7,
-      "name": "onUpdate"
+      "name": "progrss"
     },
     {
       "id": 8,
-      "name": "paused"
+      "name": "time"
     },
     {
       "id": 9,
-      "name": "reversed"
+      "name": "onComplete"
     },
     {
       "id": 10,
-      "name": "timeScale"
+      "name": "onUpdate"
     },
     {
       "id": 11,
-      "name": "progress"
+      "name": "paused"
     },
     {
       "id": 12,
-      "name": "svg"
+      "name": "reversed"
     },
     {
       "id": 13,
-      "name": "motionPath"
+      "name": "timeScale"
     },
     {
       "id": 14,
-      "name": "scrollTrigger"
+      "name": "progress"
     },
     {
       "id": 15,
-      "name": "matchMedia"
+      "name": "svg"
     },
     {
       "id": 16,
-      "name": "timeline"
+      "name": "motionPath"
     },
     {
       "id": 17,
-      "name": "stagger"
+      "name": "scrollTrigger"
     },
     {
       "id": 18,
-      "name": "yoyo"
+      "name": "matchMedia"
     },
     {
       "id": 19,
-      "name": "repeat"
+      "name": "timeline"
     },
     {
       "id": 20,
-      "name": "from"
+      "name": "stagger"
     },
     {
       "id": 21,
-      "name": "to"
+      "name": "yoyo"
     },
     {
       "id": 22,
-      "name": "test"
+      "name": "repeat"
     },
     {
       "id": 23,
-      "name": "CSS3"
+      "name": "from"
     },
     {
       "id": 24,
-      "name": "3D"
+      "name": "to"
     },
     {
       "id": 25,
+      "name": "test"
+    },
+    {
+      "id": 26,
+      "name": "CSS3"
+    },
+    {
+      "id": 27,
+      "name": "3D"
+    },
+    {
+      "id": 28,
       "name": "卡片"
     }
   ],

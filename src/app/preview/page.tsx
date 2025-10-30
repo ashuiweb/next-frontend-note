@@ -6,7 +6,7 @@ import VConsole from "vconsole";
 import { transform } from "@babel/standalone";
 
 import { useIframeSync } from "@/hooks/useIframeSync";
-import { gsap, useGSAP } from "@/util/gsap";
+import * as gsapUtil from "@/util/gsap";
 import * as ahooks from "ahooks";
 import { useDebounceFn, useKeyPress, useMemoizedFn } from "ahooks";
 import dayjs from "dayjs";
@@ -14,12 +14,12 @@ import dayjs from "dayjs";
 const currentDependencies = {
     dayjs,
     ahooks,
-    gsap,
+
     useEffect,
     useState,
     useRef,
     useMemo,
-    useGSAP,
+    ...gsapUtil,
     ...ahooks,
 };
 

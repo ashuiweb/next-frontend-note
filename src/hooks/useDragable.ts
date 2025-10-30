@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState, useCallback } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 interface DragPosition {
     x: number; // 横向位置（像素）
@@ -14,14 +14,16 @@ interface DragOptions {
     maxX?: number | string;
     minY?: number | string;
     maxY?: number | string;
-    updateCB?: (position: DragPosition) => void;
+    updateCB?: (position: DragPosition & { parent: HTMLElement; target: HTMLElement }) => void;
+    handler?: SelectorOrRef; // 新增：操作手柄选择器
+    resize?: boolean; // 新增：是否为调整尺寸模式
 }
 
 type SelectorOrRef = string | RefObject<HTMLElement> | HTMLElement;
 
 export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
-    const { dragX = true, dragY = true, minX = 0, maxX = "100%", minY = 0, maxY = "100%" } = options;
-
+    const { dragX = true, dragY = true, minX = 0, maxX = "100%", minY = 0, maxY = "100%", handler, resize = false } = options;
+    const parentRef = useRef<HTMLElement>();
     // 使用 useCallback 包装 updateCB 以确保它不会导致不必要的重新渲染
     const updateCBRef = useRef(options.updateCB);
     useEffect(() => {
@@ -69,21 +71,48 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
         return null;
     }, [target]);
 
+    // 获取操作手柄元素
+    const getHandlerElement = useCallback((): HTMLElement | null => {
+        // 如果没有指定 handler，则使用 target 元素
+        if (!handler) {
+            return getElement();
+        }
+
+        // 如果 handler 是字符串选择器，则在 target 元素内查找
+        if (typeof handler === "string") {
+            const targetElement = getElement();
+            if (targetElement) {
+                return targetElement.querySelector(handler);
+            }
+            return null;
+        }
+
+        // 如果 handler 是 HTMLElement 或 RefObject
+        if (handler instanceof HTMLElement) {
+            return handler;
+        } else if ("current" in handler) {
+            return handler.current;
+        }
+
+        return null;
+    }, [target, handler, getElement]);
+
     // 计算并更新位置
     const updatePosition = useCallback((x: number, y: number, containerInfo: typeof containerInfoRef.current) => {
         const { width, height } = containerInfo;
 
         // 计算比例值（0-1）
-        const px = width > 0 ? Math.max(0, Math.min(1, x / width)) : 0;
-        const py = height > 0 ? Math.max(0, Math.min(1, y / height)) : 0;
-
+        /*  const px = width > 0 ? Math.max(0, Math.min(1, x / width)) : 0;
+        const py = height > 0 ? Math.max(0, Math.min(1, y / height)) : 0; */
+        const px = x / width;
+        const py = y / height;
         const newPosition: DragPosition = { x, y, px, py };
 
         setPosition(newPosition);
 
         // 调用回调，只在拖拽时触发
         if (updateCBRef.current) {
-            updateCBRef.current(newPosition);
+            updateCBRef.current({ ...newPosition, parent: parentRef.current!, target: getElement()! });
         }
 
         return newPosition;
@@ -96,6 +125,12 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
             return;
         }
 
+        const handlerElement = getHandlerElement();
+        if (!handlerElement) {
+            console.warn("useDrag: 未找到操作手柄元素");
+            return;
+        }
+
         // 确保元素可定位
         const computedStyle = window.getComputedStyle(element);
         if (computedStyle.position === "static") {
@@ -105,38 +140,58 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
         const handleMouseDown = (e: MouseEvent) => {
             e.preventDefault();
 
+            const element = getElement();
+            if (!element) return;
+
             const parentElement = (element.offsetParent as HTMLElement) || document.body;
+            parentRef.current = parentElement;
             const parentRect = parentElement.getBoundingClientRect();
             const elementRect = element.getBoundingClientRect();
 
             // 记录起始鼠标位置
             startPosRef.current = { x: e.clientX, y: e.clientY };
 
-            // 记录元素当前位置（相对于父元素）
-            elementStartPosRef.current = {
-                x: elementRect.left - parentRect.left,
-                y: elementRect.top - parentRect.top,
-            };
+            // 记录元素当前位置或尺寸
+            if (resize) {
+                elementStartPosRef.current = {
+                    x: elementRect.width,
+                    y: elementRect.height,
+                };
+            } else {
+                elementStartPosRef.current = {
+                    x: elementRect.left - parentRect.left,
+                    y: elementRect.top - parentRect.top,
+                };
+            }
 
             // 计算并缓存容器信息和边界值
             const containerWidth = parentRect.width;
             const containerHeight = parentRect.height;
-            const elementWidth = element.offsetWidth;
-            const elementHeight = element.offsetHeight;
+            
+            let elementWidth = 0;
+            let elementHeight = 0;
+            
+            if (!resize) {
+                elementWidth = element.offsetWidth;
+                elementHeight = element.offsetHeight;
+            }
 
             containerInfoRef.current = {
                 width: containerWidth,
                 height: containerHeight,
                 minXValue: parseValue(minX, containerWidth),
-                maxXValue: parseValue(maxX, containerWidth) - elementWidth,
+                maxXValue: resize ? parseValue(maxX, containerWidth) : parseValue(maxX, containerWidth) - elementWidth,
                 minYValue: parseValue(minY, containerHeight),
-                maxYValue: parseValue(maxY, containerHeight) - elementHeight,
+                maxYValue: resize ? parseValue(maxY, containerHeight) : parseValue(maxY, containerHeight) - elementHeight,
             };
 
             isDraggingRef.current = true;
 
             // 添加拖拽时的视觉效果
-            element.style.cursor = "grabbing";
+            const handlerElement = getHandlerElement();
+            if (handlerElement) {
+                handlerElement.style.cursor = resize ? "col-resize" : "grabbing";
+            }
             document.body.style.userSelect = "none";
         };
 
@@ -147,28 +202,51 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
             const deltaX = e.clientX - startPosRef.current.x;
             const deltaY = e.clientY - startPosRef.current.y;
 
-            // 计算新位置
-            let newX = elementStartPosRef.current.x;
-            let newY = elementStartPosRef.current.y;
-
             const info = containerInfoRef.current;
 
-            // 应用横向拖拽
-            if (dragX) {
-                newX = elementStartPosRef.current.x + deltaX;
-                newX = Math.max(info.minXValue, Math.min(newX, info.maxXValue));
-                element.style.left = `${newX}px`;
-            }
+            // 如果是调整尺寸模式
+            if (resize) {
+                let newWidth = elementStartPosRef.current.x;
+                let newHeight = elementStartPosRef.current.y;
 
-            // 应用纵向拖拽
-            if (dragY) {
-                newY = elementStartPosRef.current.y + deltaY;
-                newY = Math.max(info.minYValue, Math.min(newY, info.maxYValue));
-                element.style.top = `${newY}px`;
-            }
+                // 应用宽度调整
+                if (dragX) {
+                    newWidth = elementStartPosRef.current.x + deltaX;
+                    newWidth = Math.max(info.minXValue, Math.min(newWidth, info.maxXValue));
+                    element.style.width = `${newWidth}px`;
+                }
 
-            // 更新位置状态
-            updatePosition(newX, newY, info);
+                // 应用高度调整
+                if (dragY) {
+                    newHeight = elementStartPosRef.current.y + deltaY;
+                    newHeight = Math.max(info.minYValue, Math.min(newHeight, info.maxYValue));
+                    element.style.height = `${newHeight}px`;
+                }
+
+                // 更新位置状态
+                updatePosition(newWidth, newHeight, info);
+            } else {
+                // 计算新位置
+                let newX = elementStartPosRef.current.x;
+                let newY = elementStartPosRef.current.y;
+
+                // 应用横向拖拽
+                if (dragX) {
+                    newX = elementStartPosRef.current.x + deltaX;
+                    newX = Math.max(info.minXValue, Math.min(newX, info.maxXValue));
+                    element.style.left = `${newX}px`;
+                }
+
+                // 应用纵向拖拽
+                if (dragY) {
+                    newY = elementStartPosRef.current.y + deltaY;
+                    newY = Math.max(info.minYValue, Math.min(newY, info.maxYValue));
+                    element.style.top = `${newY}px`;
+                }
+
+                // 更新位置状态
+                updatePosition(newX, newY, info);
+            }
         };
 
         const handleMouseUp = () => {
@@ -177,7 +255,7 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
             isDraggingRef.current = false;
 
             // 恢复样式
-            element.style.cursor = "grab";
+            handlerElement.style.cursor = "grab";
             document.body.style.userSelect = "";
         };
 
@@ -187,8 +265,17 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
             const parentRect = parentElement.getBoundingClientRect();
             const elementRect = element.getBoundingClientRect();
 
-            const initialX = elementRect.left - parentRect.left;
-            const initialY = elementRect.top - parentRect.top;
+            let initialX, initialY;
+
+            // 如果是调整尺寸模式，使用元素的宽度和高度
+            if (resize) {
+                initialX = elementRect.width;
+                initialY = elementRect.height;
+            } else {
+                // 否则使用元素的位置
+                initialX = elementRect.left - parentRect.left;
+                initialY = elementRect.top - parentRect.top;
+            }
 
             containerInfoRef.current = {
                 width: parentRect.width,
@@ -203,25 +290,33 @@ export function useDragable(target: SelectorOrRef, options: DragOptions = {}) {
         };
 
         // 设置初始样式
-        element.style.cursor = "grab";
+        handlerElement.style.cursor = "grab";
 
         // 初始化位置
         initPosition();
 
         // 绑定事件
-        element.addEventListener("mousedown", handleMouseDown);
+        handlerElement.addEventListener("mousedown", handleMouseDown);
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
 
         // 清理函数
         return () => {
-            element.removeEventListener("mousedown", handleMouseDown);
+            handlerElement.removeEventListener("mousedown", handleMouseDown);
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
-            element.style.cursor = "";
+            handlerElement.style.cursor = "";
             document.body.style.userSelect = "";
         };
-    }, [target, dragX, dragY, minX, maxX, minY, maxY, getElement, parseValue, updatePosition]);
+    }, [target, dragX, dragY, minX, maxX, minY, maxY, handler, getElement, getHandlerElement, parseValue, updatePosition]);
 
-    return position;
+    return { 
+        ...position, 
+        parent: parentRef.current, 
+        target: getElement(),
+        width: position.x,
+        height: position.y,
+        pWidth: position.px,
+        pHeight: position.py
+    };
 }

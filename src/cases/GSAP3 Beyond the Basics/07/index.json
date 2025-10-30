@@ -1,8 +1,9 @@
 {
-    "title": "06 callbacks",
-    "description": "callback的用法以及如何传递参数",
+    "title": "07 构建一条可视化时间线",
+    "description": "animation.getChildren()",
     "tags": [
-        "callback"
+        "callback",
+        "getChildren"
     ],
     "difficulty": "beginner",
     "author": "阿水",
