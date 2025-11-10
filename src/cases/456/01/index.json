@@ -1,0 +1,13 @@
+{
+    "title": "粒子动画效果",
+    "description": "使用Canvas API创建粒子动画效果",
+    "tags": [
+        "Canvas",
+        "粒子",
+        "动画"
+    ],
+    "difficulty": "advanced",
+    "previewUrl": "/preview/particle",
+    "author": "前端达人",
+    "likes": 128
+}

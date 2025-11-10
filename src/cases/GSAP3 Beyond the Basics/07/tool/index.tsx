@@ -36,20 +36,11 @@ export default function Tool({ animation }: { animation: gsap.core.Timeline }) {
                 // 更新子动画的开始时间
                 if (px !== undefined && total > 0 && draggingIndex === index) {
                     const newStartTime = px * total;
-                    // 保存原始持续时间
-                    const originalDuration = child.duration();
                     // 使用 GSAP 的 startTime 方法更新子动画的开始时间
                     child.startTime(newStartTime);
-                    // 保持原有的持续时间不变，这样结束时间也会相应调整
-                    child.duration(originalDuration);
                     // 暂停主动画以避免冲突
                     animation.paused(true);
                     console.log(`Updated child ${index} start time to: ${newStartTime}`);
-                    
-                    // 备选方案：如果你想保持结束时间不变（调整持续时间）
-                    // const newEndTime = child.endTime(); // 获取当前结束时间
-                    // child.startTime(newStartTime); // 设置新开始时间
-                    // child.duration(newEndTime - newStartTime); // 调整持续时间以保持结束时间不变
                 }
             },
         });

@@ -9,7 +9,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <FullScreenSideDrawer />
-            <body>{children}</body>
+            <body className={`  antialiased`}>{children}</body>
         </html>
     );
 }

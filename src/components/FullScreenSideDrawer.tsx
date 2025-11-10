@@ -54,7 +54,7 @@ const FullScreenSideDrawer: React.FC<FullScreenSideDrawerProps> = ({ isOpen, onO
     }, [isOpen, fullScreenSideDrawerOpen]);
 
     return (
-        <Drawer direction={direction} open={open && !!fullScreenSideDrawerChildren} onOpenChange={onOpenChange}>
+        <Drawer direction={direction} open={open} onOpenChange={onOpenChange}>
             <DrawerTrigger asChild>{trigger}</DrawerTrigger>
 
             <DrawerContent

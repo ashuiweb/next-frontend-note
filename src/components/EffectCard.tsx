@@ -2,9 +2,8 @@
 
 import useClient from "@/app/hooks/useClient";
 import useFullScreenDrawer from "@/hooks/useFullScreenDrawer";
-import { useAsyncEffect, useLongPress } from "ahooks";
-import Image from "next/image";
-import { lazy, Suspense, useRef, useState } from "react";
+import { useLongPress } from "ahooks";
+import { lazy, Suspense, useRef } from "react";
 import Scale from "./Scale";
 
 // 定义特效项目类型
@@ -20,7 +19,6 @@ interface EffectItem {
     previewUrl: string;
     author: string;
     likes: number;
-    thumb?: string;
     createTime: string;
 }
 
@@ -33,15 +31,6 @@ interface EffectCardProps {
 const EffectCard: React.FC<EffectCardProps> = ({ effect, darkMode, ratio }) => {
     // 异步加载组件
     const Detail = lazy(() => import(`../${effect.path}`));
-    const [thumb, setThumb] = useState<string>();
-
-    useAsyncEffect(async () => {
-        try {
-            const t = (await import(`../${effect.path}/image.png`)).default;
-            setThumb(t);
-        } catch (error) {}
-    }, []);
-
     const { to } = useClient();
     const { drawer } = useFullScreenDrawer();
 
@@ -61,20 +50,17 @@ const EffectCard: React.FC<EffectCardProps> = ({ effect, darkMode, ratio }) => {
                 }}
                 onContextMenu={(e) => {
                     e.preventDefault();
-                    drawer(<iframe src={`/detail1?path=${effect.path}`} className="border-none" width="100%" height="100%" />);
+                    drawer(<Detail />);
                 }}
                 onDoubleClick={() => to(`/detail?path=${effect.path}`)}
             >
                 <Suspense fallback={<div>加载中...</div>}>
-                    {thumb ? (
-                        <Image src={thumb} alt="" className="w-full  " />
-                    ) : (
-                        <Scale ratio={ratio}>
-                            <Detail />
-                        </Scale>
-                    )}
+                    <Scale ratio={ratio}>
+                        <Detail />
+                    </Scale>
                 </Suspense>
             </div>
+
             {/* 内容区域 */}
             <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
