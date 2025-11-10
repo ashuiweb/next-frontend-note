@@ -240,11 +240,27 @@
       "author": "阿水",
       "likes": 95,
       "category": "basic",
-      "createTime": "2025-10-14 21:05:45"
+      "createTime": "2025-10-16 11:40:33"
     },
     {
       "id": 17,
       "path": "cases/first/02",
+      "title": "demo2",
+      "description": "this is demo",
+      "tags": [
+        "stagger",
+        "yoyo",
+        "repeat"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "basic",
+      "createTime": "2025-10-16 11:40:33"
+    },
+    {
+      "id": 18,
+      "path": "cases/first/03",
       "title": "demo2",
       "description": "this is demo",
       "tags": [
@@ -259,7 +275,7 @@
       "createTime": "2025-10-13 15:49:00"
     },
     {
-      "id": 18,
+      "id": 19,
       "path": "cases/first/01",
       "title": "demo1",
       "description": "this is demo",
@@ -272,7 +288,23 @@
       "author": "阿水",
       "likes": 95,
       "category": "first",
-      "createTime": "2025-10-13 11:38:00"
+      "createTime": "2025-10-16 11:40:33"
+    },
+    {
+      "id": 6,
+      "path": "cases/first/02",
+      "title": "demo2",
+      "description": "this is demo",
+      "tags": [
+        "CSS3",
+        "3D",
+        "卡片"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "first",
+      "createTime": "2025-10-16 11:40:33"
     }
   ],
   "tags": [
@@ -303,6 +335,22 @@
     {
       "id": 7,
       "name": "progrss"
+    },
+    {
+      "id": 4,
+      "name": "stagger"
+    },
+    {
+      "id": 5,
+      "name": "yoyo"
+    },
+    {
+      "id": 6,
+      "name": "repeat"
+    },
+    {
+      "id": 7,
+      "name": "timeline"
     },
     {
       "id": 8,
