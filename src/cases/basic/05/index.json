@@ -1,0 +1,11 @@
+{
+    "title": "matchMedia 响应式动画",
+    "description": "根据屏幕大小不同展示不同的动画",
+    "tags": [
+        "scrollTrigger",
+        "matchMedia"
+    ],
+    "difficulty": "beginner",
+    "author": "阿水",
+    "likes": 95
+}

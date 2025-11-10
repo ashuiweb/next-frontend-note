@@ -1,0 +1,7 @@
+.Main {
+    :global {
+        .text-primay {
+            @apply font-bold text-3xl  bg-black rounded;
+        }
+    }
+}

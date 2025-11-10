@@ -1,0 +1,10 @@
+{
+    "title": "08 取消某个元素的动画",
+    "description": "gsap.killTweensOf('classname'，可选属性，支持多个)",
+    "tags": [
+        "killTweensOf"
+    ],
+    "difficulty": "beginner",
+    "author": "阿水",
+    "likes": 95
+}
