@@ -292,6 +292,20 @@
     },
     {
       "id": 20,
+      "path": "cases/first/04",
+      "title": "react 练习",
+      "description": "this is demo",
+      "tags": [
+        "react"
+      ],
+      "difficulty": "beginner",
+      "author": "阿水",
+      "likes": 95,
+      "category": "first",
+      "createTime": "2025-11-10 20:52:48"
+    },
+    {
+      "id": 21,
       "path": "cases/duyi/03",
       "title": "面向对象开发俄罗斯方块",
       "description": "面向对象开发俄罗斯方块",
@@ -417,6 +431,10 @@
     {
       "id": 28,
       "name": "卡片"
+    },
+    {
+      "id": 29,
+      "name": "react"
     }
   ],
   "categories": [

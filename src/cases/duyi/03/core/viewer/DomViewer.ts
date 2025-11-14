@@ -1,7 +1,8 @@
 import $ from "jquery";
+import { DomViewerConfig } from "../constant/config";
 import { Square } from "../Square";
 import { IViewer } from "../types";
-import { DomViewerConfig } from "./config";
+
 export class DOMViewer implements IViewer {
     private dom?: JQuery<HTMLElement>;
     private isRemove: boolean = false;
